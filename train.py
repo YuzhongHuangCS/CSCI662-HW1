@@ -1,5 +1,5 @@
 import argparse
-from base import Model
+from model import Model
 import pdb
 import pickle
 
@@ -13,12 +13,11 @@ if __name__ == "__main__":
 	print('Args:', args)
 
 	model = Model.create(args.m)
-	model.train(args.i)
-
-	with open(args.o, 'wb') as fout:
-		pickle.dump(model, fout, pickle.HIGHEST_PROTOCOL)
-
 	if args.s:
 		model.score(args.i)
-	
+	else:
+		model.train(args.i)
+		with open(args.o, 'wb') as fout:
+			pickle.dump(model, fout, pickle.HIGHEST_PROTOCOL)
+
 	print('OK')
